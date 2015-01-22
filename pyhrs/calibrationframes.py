@@ -249,7 +249,7 @@ def create_orderframe(data, first_order, xc, detect_kernal, smooth_length=15,
         try:
             y2 = np.where(cdata == 0)[0][0]
         except Exception as e:
-            warnings.warn(e)
+            warnings.warn(str(e))
         y2 = min(ys - 1, y2)
         try:
             yc = cdata[y1:y2].argmax() + y1

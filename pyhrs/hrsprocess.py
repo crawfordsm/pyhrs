@@ -231,7 +231,7 @@ def hrs_process(image_name, ampsec=[], oscansec=[], trimsec=[],
     # read in the data
     ccd = ccdproc.CCDData.read(image_name, unit=u.adu)
 
-    namps = ccd.header['CCDNAMPS']
+    namps = ccd.header['CCDAMPS']
     # thow errors for the wrong number of amps
     if len(ampsec) != namps:
         raise ValueError('Number of ampsec does not equal number of amps')
