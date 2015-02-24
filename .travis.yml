@@ -27,6 +27,7 @@ matrix:
 
         # Check for sphinx doc build warnings - we do this first because it
         # may run for a long time
+
         #- python: 2.7
         #  env: SETUP_CMD='build_sphinx -w'
 
@@ -64,6 +65,9 @@ before_install:
     - ./miniconda.sh -b
     - export PATH=/home/travis/miniconda/bin:$PATH
     - conda update --yes conda
+
+    # UPDATE APT-GET LISTINGS
+    - sudo apt-get update
 
     # DOCUMENTATION DEPENDENCIES
     - if [[ $SETUP_CMD == build_sphinx* ]]; then sudo apt-get install graphviz texlive-latex-extra dvipng; fi
