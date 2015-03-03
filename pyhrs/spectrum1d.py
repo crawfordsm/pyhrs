@@ -8,14 +8,14 @@ __all__ = ['Spectrum1D']
 import copy
 from astropy.extern import six
 from astropy import log
-from astropy.nddata import NDData, FlagCollection
+from astropy.nddata import NDDataArray, FlagCollection
 
 from astropy import units as u
 
 import numpy as np
 
 
-class Spectrum1D(NDData):
+class Spectrum1D(NDDataArray):
 
     """A subclass of `NDData` for a one dimensional spectrum in Astropy.
 
@@ -47,12 +47,6 @@ class Spectrum1D(NDData):
         `mask` here will causes the mask from the masked array to be
         ignored.
 
-    flags : `~numpy.ndarray` or `~astropy.nddata.FlagCollection`, optional
-        Flags giving information about each pixel. These can be specified
-        either as a Numpy array of any type with a shape matching that of the
-        data, or as a `~astropy.nddata.FlagCollection` instance which has a
-        shape matching that of the data.
-
     meta : `dict`-like object, optional
         Metadata for this object.  "Metadata" here means all information that
         is included with this object but not part of any other attribute
@@ -64,16 +58,16 @@ class Spectrum1D(NDData):
     @classmethod
     def from_array(cls, dispersion, flux, dispersion_unit=None,
                    uncertainty=None, mask=None,
-                   flags=None, meta=None, copy=True, unit=None):
+                   meta=None, copy=True, unit=None):
         return cls(wavelength=dispersion, flux=flux, wcs=None, unit=unit,
-                   uncertainty=uncertainty, mask=mask, flags=flags, meta=meta)
+                   uncertainty=uncertainty, mask=mask, meta=meta)
 
     def __init__(self, wavelength, flux, wcs=None, unit=None, uncertainty=None,
-                 mask=None, flags=None, meta=None, indexer=None):
+                 mask=None, meta=None, indexer=None):
 
         super(Spectrum1D, self).__init__(data=flux, unit=unit, wcs=wcs,
                                          uncertainty=uncertainty,
-                                         mask=mask, flags=flags, meta=meta)
+                                         mask=mask, meta=meta)
 
         self.wavelength = wavelength
 
